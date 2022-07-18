@@ -87,6 +87,10 @@ Run Options - JMeter GUI
 ```bash
 mvn jmeter:configure jmeter:gui -DguiTestFile="src/test/jmeter/box_java_sdk.jmx"
 ```
+OR
+```bash
+mvn jmeter:configure jmeter:gui -DguiTestFile="src/test/jmeter/box_http1.jmx"
+```
 
 Run Options - Command Line
 -------------
