@@ -20,17 +20,12 @@ import java.nio.file.Paths;
  * JMeter sampler client which creates a Box connection.
  */
 public class GetBoxConnection implements JavaSamplerClient{
-
     private static final String MAX_CACHE_ENTRIES = "max.cache.entries";
-
     private static final String USER_LOGIN = "user.login";
-
     private static final String BOX_ACCESS_TOKEN = "box.access.token";
     private static final String BOX_CONFIG_PATH = "box.config.path";
-
     private String boxConfigPath = null;
     private int maxCacheEntries;
-
     private String userLogin = null;
 
     /**
@@ -75,7 +70,7 @@ public class GetBoxConnection implements JavaSamplerClient{
             BoxConfig boxConfig = BoxConfig.readFrom(new FileReader(boxConfigPath));
 
             BoxDeveloperEditionAPIConnection api = BoxDeveloperEditionAPIConnection.getUserConnection(this.userLogin, boxConfig, accessTokenCache);
-            api.setCustomHeader("Accept-Encoding", "gzip, deflate");
+//            api.setCustomHeader("Accept-Encoding", "gzip, deflate");
 
             String accessToken = api.getAccessToken();
 

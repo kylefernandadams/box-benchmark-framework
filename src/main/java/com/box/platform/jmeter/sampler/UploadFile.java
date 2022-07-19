@@ -30,11 +30,7 @@ public class UploadFile implements JavaSamplerClient {
     private static final String CURRENT_FOLDER_ID = "current.folder.id";
     private static final String SAMPLE_FILE_PATH = "sample.file.path";
     private static final String TEST_FILE_NAME = ".TestFile.txt";
-
     private static final String THREAD_GUID = "thread.num";
-    private String threadGuid = null;
-    private String fileGuid = null;
-
 
     /**
      * Get default parameters for the sampler client
@@ -48,7 +44,6 @@ public class UploadFile implements JavaSamplerClient {
         defaultParameters.addArgument(CURRENT_FILE_COUNT,"${" + CURRENT_FILE_COUNT + "}");
         defaultParameters.addArgument(SAMPLE_FILE_PATH, "${" + SAMPLE_FILE_PATH + "}");
         defaultParameters.addArgument(CURRENT_FILE_ID, "${" + CURRENT_FILE_ID + "}");
-        defaultParameters.addArgument(THREAD_GUID,"${" + THREAD_GUID + "}");
 
         return defaultParameters;
     }
@@ -66,9 +61,6 @@ public class UploadFile implements JavaSamplerClient {
 
             BoxConnectionUtil util = new BoxConnectionUtil(boxConfigPath, maxCacheEntries);
             this.api = util.getAppUserConnection(userLogin);
-            this.threadGuid = setupContext.getParameter(THREAD_GUID);
-            this.fileGuid = String.valueOf(UUID.randomUUID());
-
         } catch (Exception e) {
             e.printStackTrace();
         }

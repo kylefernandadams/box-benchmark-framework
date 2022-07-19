@@ -34,10 +34,7 @@ public class CreateFolder implements JavaSamplerClient {
     private static final String BASE_FOLDER_NAME = "JMeterTest-SDK-";
     private static final String TEST_FOLDER_NAME = "-TestFolder";
     private static final String DATE_TIME_FORMAT = "yyyyMMdd-HHmmss";
-    private static final String THREAD_GUID = "thread.num";
     private String jmeterBaseFolderId = null;
-
-    private String threadGuid = null;
 
 
     /**
@@ -51,7 +48,6 @@ public class CreateFolder implements JavaSamplerClient {
         defaultParameters.addArgument(USER_LOGIN, "${" + USER_LOGIN + "}");
         defaultParameters.addArgument(CURRENT_FOLDER_COUNT,"${" + CURRENT_FOLDER_COUNT + "}");
         defaultParameters.addArgument(BASE_FOLDER_ID,"${" + BASE_FOLDER_ID + "}");
-        defaultParameters.addArgument(THREAD_GUID,"${" + THREAD_GUID + "}");
 
         return defaultParameters;
     }
@@ -82,7 +78,6 @@ public class CreateFolder implements JavaSamplerClient {
             BoxFolder.Info rootFolderInfo = baseFolder.createFolder(BASE_FOLDER_NAME + UUID.randomUUID() + "-" + now);
             System.out.println("Found JMeter Test Folder: " + rootFolderInfo.getID());
             jmeterBaseFolderId = rootFolderInfo.getID();
-            this.threadGuid = setupContext.getParameter(THREAD_GUID);
 
         } catch (Exception e) {
             e.printStackTrace();

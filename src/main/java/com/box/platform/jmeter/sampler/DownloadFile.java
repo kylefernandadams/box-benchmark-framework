@@ -12,6 +12,7 @@ import org.apache.jmeter.services.FileServer;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.UUID;
 
 /**
  *  JMeter sampler client which uploads files to Box.
@@ -22,9 +23,6 @@ public class DownloadFile implements JavaSamplerClient {
     private static final String MAX_CACHE_ENTRIES = "max.cache.entries";
     private static final String USER_LOGIN = "user.login";
     private static final String CURRENT_FILE_ID = "current.file.id";
-    private static final String THREAD_GUID = "thread.num";
-    private String threadGuid = null;
-
 
     /**
      * Get default parameters for the sampler client
@@ -35,7 +33,6 @@ public class DownloadFile implements JavaSamplerClient {
         defaultParameters.addArgument(BOX_CONFIG_PATH, "${"+ BOX_CONFIG_PATH + "}");
         defaultParameters.addArgument(MAX_CACHE_ENTRIES, "${" + MAX_CACHE_ENTRIES + "}");
         defaultParameters.addArgument(USER_LOGIN, "${" + USER_LOGIN + "}");
-        defaultParameters.addArgument(THREAD_GUID,"${" + THREAD_GUID + "}");
 
         return defaultParameters;
     }
@@ -53,9 +50,6 @@ public class DownloadFile implements JavaSamplerClient {
 
             BoxConnectionUtil util = new BoxConnectionUtil(boxConfigPath, maxCacheEntries);
             this.api = util.getAppUserConnection(userLogin);
-            this.threadGuid = setupContext.getParameter(THREAD_GUID);
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,13 +69,12 @@ public class DownloadFile implements JavaSamplerClient {
         SampleResult result = new SampleResult();
         result.sampleStart();
         try{
-
             String currentFileId = runContext.getJMeterVariables().get(CURRENT_FILE_ID);
 
             BoxFile boxFile = new BoxFile(api, currentFileId);
             BoxFile.Info boxFileInfo = boxFile.getInfo();
 
-            String downloadPath = FileServer.getFileServer().getDefaultBase() + "/" + this.threadGuid + "." + boxFileInfo.getName();
+            String downloadPath = FileServer.getFileServer().getDefaultBase() + "/" + UUID.randomUUID() + "." + boxFileInfo.getName();
             FileOutputStream fileOutputStream = new FileOutputStream(downloadPath);
             boxFile.download(fileOutputStream);
             fileOutputStream.flush();

@@ -26,13 +26,8 @@ public class CreateMetadataOnFile implements JavaSamplerClient {
     private static final String METADATA_TEMPLATE_KEY = "metadata.template.key";
     private static final String METADATA_KEYS = "metadata.keys";
     private static final String METADATA_VALUES = "metadata.values";
-    private static final String THREAD_GUID = "thread.num";
-
-    private String enterpriseId = null;
     private String metadataTemplateKey = null;
     private Metadata metadata = null;
-    private String threadGuid = null;
-
 
     /**
      * Get default parameters for the sampler client
@@ -48,7 +43,6 @@ public class CreateMetadataOnFile implements JavaSamplerClient {
         defaultParameters.addArgument(METADATA_KEYS, "${" + METADATA_KEYS + "}");
         defaultParameters.addArgument(METADATA_VALUES, "${" + METADATA_VALUES + "}");
         defaultParameters.addArgument(CURRENT_FILE_ID, "${" + CURRENT_FILE_ID + "}");
-        defaultParameters.addArgument(THREAD_GUID,"${" + THREAD_GUID + "}");
 
         return defaultParameters;
     }
@@ -90,8 +84,6 @@ public class CreateMetadataOnFile implements JavaSamplerClient {
                     metadata.add("/" + metadataKey, metadataValue);
                 }
             }
-            this.threadGuid = setupContext.getParameter(THREAD_GUID);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
