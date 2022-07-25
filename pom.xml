@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.box</groupId>
             <artifactId>box-java-sdk</artifactId>
-            <version>3.1.2</version>
+            <version>3.3.0</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -98,26 +98,35 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <overrideRootLogLevel>debug</overrideRootLogLevel>
                     <jMeterProcessJVMSettings>
-                        <xms>2048</xms>
-                        <xmx>4096</xmx>
-<!--                        <arguments>-->
-                            <!--
-                            <argument>-DsocksProxyHost=localhost</argument>
-                            <argument>-DsocksProxyPort=8080</argument>
-                            -->
-<!--                        </arguments>-->
+                        <xms>2048</xms>>
+                        <xmx>4096</xmx>>
+                        <arguments>
+                            <argument>-server</argument>
+<!--                            <argument>-XX:InitialHeapSize=4G</argument>-->
+<!--                            <argument>-XX:MaxHeapSize=4G</argument>-->
+<!--                            <argument>-XX:MaxGCPauseMillis=500</argument>-->
+<!--                            <argument>-XX:+DisableExplicitGC</argument>-->
+<!--                            <argument>-XX:+UseStringDeduplication</argument>-->
+<!--                            <argument>-XX:MaxMetaspaceSize=256M</argument>-->
+<!--                            <argument>-XX:+ParallelRefProcEnabled</argument>-->
+                        </arguments>
                     </jMeterProcessJVMSettings>
                     <testFilesIncluded>
-<!--                        <jMeterTestFile>box_http1.jmx</jMeterTestFile>-->
-                        <jMeterTestFile>box_java_sdk.jmx</jMeterTestFile>
+<!--                        <jMeterTestFile>box_http1_volume.jmx</jMeterTestFile>-->
+<!--                        <jMeterTestFile>box_http1_duration.jmx</jMeterTestFile>-->
+                        <jMeterTestFile>box_java_sdk_volume.jmx</jMeterTestFile>
+<!--                        <jMeterTestFile>box_java_sdk_duration.jmx</jMeterTestFile>-->
                     </testFilesIncluded>
                     <customPropertiesFiles>
                         <file>${project.basedir}/src/test/jmeter/box_http1.properties</file>
                     </customPropertiesFiles>
                     <ignoreResultFailures>true</ignoreResultFailures>
                     <generateReports>true</generateReports>
+                    <jmeterExtensions>
+<!--                        <artifact>kg.apc:jmeter-plugins-manager:1.7</artifact>-->
+<!--                        <artifact>kg.apc:jmeter-plugins-dummy:0.4</artifact>-->
+                    </jmeterExtensions>
                 </configuration>
             </plugin>
         </plugins>

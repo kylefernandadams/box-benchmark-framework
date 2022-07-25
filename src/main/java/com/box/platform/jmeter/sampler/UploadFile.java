@@ -8,9 +8,6 @@ import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
 import org.apache.jmeter.samplers.SampleResult;
-import org.apache.jmeter.threads.JMeterContext;
-import org.apache.jmeter.threads.JMeterContextService;
-import org.apache.jmeter.threads.JMeterVariables;
 
 import java.io.FileInputStream;
 import java.io.PrintWriter;
@@ -25,12 +22,10 @@ public class UploadFile implements JavaSamplerClient {
     private static final String BOX_CONFIG_PATH = "box.config.path";
     private static final String MAX_CACHE_ENTRIES = "max.cache.entries";
     private static final String USER_LOGIN = "user.login";
-    private static final String CURRENT_FILE_COUNT = "current.file.count";
     private static final String CURRENT_FILE_ID = "current.file.id";
     private static final String CURRENT_FOLDER_ID = "current.folder.id";
     private static final String SAMPLE_FILE_PATH = "sample.file.path";
-    private static final String TEST_FILE_NAME = ".TestFile.txt";
-    private static final String THREAD_GUID = "thread.num";
+    private static final String TEST_FILE_NAME = ".TestFile.pdf";
 
     /**
      * Get default parameters for the sampler client
@@ -41,9 +36,7 @@ public class UploadFile implements JavaSamplerClient {
         defaultParameters.addArgument(BOX_CONFIG_PATH, "${"+ BOX_CONFIG_PATH + "}");
         defaultParameters.addArgument(MAX_CACHE_ENTRIES, "${" + MAX_CACHE_ENTRIES + "}");
         defaultParameters.addArgument(USER_LOGIN, "${" + USER_LOGIN + "}");
-        defaultParameters.addArgument(CURRENT_FILE_COUNT,"${" + CURRENT_FILE_COUNT + "}");
         defaultParameters.addArgument(SAMPLE_FILE_PATH, "${" + SAMPLE_FILE_PATH + "}");
-        defaultParameters.addArgument(CURRENT_FILE_ID, "${" + CURRENT_FILE_ID + "}");
 
         return defaultParameters;
     }
@@ -83,10 +76,9 @@ public class UploadFile implements JavaSamplerClient {
             String currentFolderId = runContext.getJMeterVariables().get(CURRENT_FOLDER_ID);
 
             BoxFolder folder = new BoxFolder(api, currentFolderId);
-            String currentFileCount = runContext.getParameter(CURRENT_FILE_COUNT);
             String sampleFilePath = runContext.getParameter(SAMPLE_FILE_PATH);
             FileInputStream stream = new FileInputStream(sampleFilePath);
-            String filename = UUID.randomUUID() + "." + currentFileCount + TEST_FILE_NAME;
+            String filename = UUID.randomUUID() + "." + TEST_FILE_NAME;
             BoxFile.Info fileInfo = folder.uploadFile(stream, filename);
             stream.close();
 

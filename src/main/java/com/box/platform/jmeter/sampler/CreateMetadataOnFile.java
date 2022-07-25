@@ -6,12 +6,11 @@ import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
 import org.apache.jmeter.samplers.SampleResult;
-import org.apache.jmeter.threads.JMeterContext;
-import org.apache.jmeter.threads.JMeterContextService;
-import org.apache.jmeter.threads.JMeterVariables;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *  JMeter sampler client which creates metadata on Box files.
@@ -22,10 +21,11 @@ public class CreateMetadataOnFile implements JavaSamplerClient {
     private static final String MAX_CACHE_ENTRIES = "max.cache.entries";
     private static final String USER_LOGIN = "user.login";
     private static final String CURRENT_FILE_ID = "current.file.id";
-    private static final String CURRENT_FILE_COUNT = "current.file.count";
     private static final String METADATA_TEMPLATE_KEY = "metadata.template.key";
-    private static final String METADATA_KEYS = "metadata.keys";
-    private static final String METADATA_VALUES = "metadata.values";
+    private static final String STRING_METADATA_KEYS = "string.metadata.keys";
+    private static final String STRING_METADATA_VALUES = "string.metadata.values";
+    private static final String NUMBER_METADATA_KEYS = "number.metadata.keys";
+    private static final String NUMBER_METADATA_VALUES = "number.metadata.values";
     private String metadataTemplateKey = null;
     private Metadata metadata = null;
 
@@ -38,10 +38,11 @@ public class CreateMetadataOnFile implements JavaSamplerClient {
         defaultParameters.addArgument(BOX_CONFIG_PATH, "${"+ BOX_CONFIG_PATH + "}");
         defaultParameters.addArgument(MAX_CACHE_ENTRIES, "${" + MAX_CACHE_ENTRIES + "}");
         defaultParameters.addArgument(USER_LOGIN, "${" + USER_LOGIN + "}");
-        defaultParameters.addArgument(CURRENT_FILE_COUNT, "${" + CURRENT_FILE_COUNT + "}");
         defaultParameters.addArgument(METADATA_TEMPLATE_KEY, "${" + METADATA_TEMPLATE_KEY + "}");
-        defaultParameters.addArgument(METADATA_KEYS, "${" + METADATA_KEYS + "}");
-        defaultParameters.addArgument(METADATA_VALUES, "${" + METADATA_VALUES + "}");
+        defaultParameters.addArgument(STRING_METADATA_KEYS, "${" + STRING_METADATA_KEYS + "}");
+        defaultParameters.addArgument(STRING_METADATA_VALUES, "${" + STRING_METADATA_VALUES + "}");
+        defaultParameters.addArgument(NUMBER_METADATA_KEYS, "${" + NUMBER_METADATA_KEYS + "}");
+        defaultParameters.addArgument(NUMBER_METADATA_VALUES, "${" + NUMBER_METADATA_VALUES + "}");
         defaultParameters.addArgument(CURRENT_FILE_ID, "${" + CURRENT_FILE_ID + "}");
 
         return defaultParameters;
@@ -60,8 +61,10 @@ public class CreateMetadataOnFile implements JavaSamplerClient {
 
 
             metadataTemplateKey = setupContext.getParameter(METADATA_TEMPLATE_KEY);
-            String[] metadataKeysArray = setupContext.getParameter(METADATA_KEYS).split(",");
-            String[] metadataValuesArray = setupContext.getParameter(METADATA_VALUES).split(",");
+            String[] stringMetadataKeysArray = setupContext.getParameter(STRING_METADATA_KEYS).split(",");
+            String[] stringMetadataValuesArray = setupContext.getParameter(STRING_METADATA_VALUES).split(",");
+            String[] numMetadataKeysArray = setupContext.getParameter(NUMBER_METADATA_KEYS).split(",");
+            String[] numMetadataValuesArray = setupContext.getParameter(NUMBER_METADATA_VALUES).split(",");
 
             String boxConfigPath = setupContext.getParameter(BOX_CONFIG_PATH);
             int maxCacheEntries = setupContext.getIntParameter(MAX_CACHE_ENTRIES);
@@ -78,9 +81,15 @@ public class CreateMetadataOnFile implements JavaSamplerClient {
 
             if(metadataTemplate != null){
                 metadata = new Metadata();
-                for (int i=0; i < metadataKeysArray.length; i++){
-                    String metadataKey = metadataKeysArray[i];
-                    String metadataValue = metadataValuesArray[i];
+                for (int i=0; i < stringMetadataKeysArray.length; i++){
+                    String metadataKey = stringMetadataKeysArray[i];
+                    String metadataValue = stringMetadataValuesArray[i];
+                    metadata.add("/" + metadataKey, metadataValue);
+
+                }
+                for (int i=0; i < numMetadataKeysArray.length; i++){
+                    String metadataKey = numMetadataKeysArray[i];
+                    double metadataValue = Double.parseDouble(numMetadataValuesArray[i]);
                     metadata.add("/" + metadataKey, metadataValue);
                 }
             }

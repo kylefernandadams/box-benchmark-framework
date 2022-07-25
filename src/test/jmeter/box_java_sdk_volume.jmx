@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.5">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Box HTTP Test Plan" enabled="true">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Box Java SDK Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
       <boolProp name="TestPlan.functional_mode">true</boolProp>
-      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
@@ -62,44 +62,22 @@
             <stringProp name="Argument.desc">Ramp-up time for test</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="httpclient.version" elementType="Argument">
-            <stringProp name="Argument.name">httpclient.version</stringProp>
-            <stringProp name="Argument.value">${__P(httpclient.version)}</stringProp>
+          <elementProp name="user.login" elementType="Argument">
+            <stringProp name="Argument.name">user.login</stringProp>
+            <stringProp name="Argument.value">${__P(user.login)}</stringProp>
+            <stringProp name="Argument.desc">User email</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="box.http.protocol" elementType="Argument">
-            <stringProp name="Argument.name">box.http.protocol</stringProp>
-            <stringProp name="Argument.value">${__P(box.http.protocol)}</stringProp>
+          <elementProp name="box.config.path" elementType="Argument">
+            <stringProp name="Argument.name">box.config.path</stringProp>
+            <stringProp name="Argument.value">${__P(box.config.path)}</stringProp>
+            <stringProp name="Argument.desc">Box App Client Id</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="box.base.domain" elementType="Argument">
-            <stringProp name="Argument.name">box.base.domain</stringProp>
-            <stringProp name="Argument.value">${__P(box.base.domain)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="box.files.path" elementType="Argument">
-            <stringProp name="Argument.name">box.files.path</stringProp>
-            <stringProp name="Argument.value">${__P(box.files.path)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="box.upload.domain" elementType="Argument">
-            <stringProp name="Argument.name">box.upload.domain</stringProp>
-            <stringProp name="Argument.value">${__P(box.upload.domain)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="box.upload.path" elementType="Argument">
-            <stringProp name="Argument.name">box.upload.path</stringProp>
-            <stringProp name="Argument.value">${__P(box.upload.path)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="box.folders.path" elementType="Argument">
-            <stringProp name="Argument.name">box.folders.path</stringProp>
-            <stringProp name="Argument.value">${__P(box.folders.path)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="box.eid" elementType="Argument">
-            <stringProp name="Argument.name">box.eid</stringProp>
-            <stringProp name="Argument.value">${__P(box.eid)}</stringProp>
+          <elementProp name="max.cache.entries" elementType="Argument">
+            <stringProp name="Argument.name">max.cache.entries</stringProp>
+            <stringProp name="Argument.value">${__P(max.cache.entries)}</stringProp>
+            <stringProp name="Argument.desc">Box App max cache entries</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="max.folder.count" elementType="Argument">
@@ -126,6 +104,30 @@
             <stringProp name="Argument.desc">Key of the Metadata Template. Note that this is not the Display Name.</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="string.metadata.keys" elementType="Argument">
+            <stringProp name="Argument.name">string.metadata.keys</stringProp>
+            <stringProp name="Argument.value">${__P(string.metadata.keys)}</stringProp>
+            <stringProp name="Argument.desc">Only Use Text or Dropdown MD Properties. Key of the Metadata properties. Note that this is not the Display Name.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="string.metadata.values" elementType="Argument">
+            <stringProp name="Argument.name">string.metadata.values</stringProp>
+            <stringProp name="Argument.value">${__P(string.metadata.values)}</stringProp>
+            <stringProp name="Argument.desc">Only Use Text or Dropdown MD Properties. Value of the Metadata properties. Note that this is not the Display Name.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="number.metadata.keys" elementType="Argument">
+            <stringProp name="Argument.name">number.metadata.keys</stringProp>
+            <stringProp name="Argument.value">${__P(number.metadata.keys)}</stringProp>
+            <stringProp name="Argument.desc">Only Use Text or Dropdown MD Properties. Key of the Metadata properties. Note that this is not the Display Name.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="number.metadata.values" elementType="Argument">
+            <stringProp name="Argument.name">number.metadata.values</stringProp>
+            <stringProp name="Argument.value">${__P(number.metadata.values)}</stringProp>
+            <stringProp name="Argument.desc">Only Use Text or Dropdown MD Properties. Value of the Metadata properties. Note that this is not the Display Name.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
           <elementProp name="use.current.datetime" elementType="Argument">
             <stringProp name="Argument.name">use.current.datetime</stringProp>
             <stringProp name="Argument.value">${__P(use.current.datetime)}</stringProp>
@@ -138,39 +140,31 @@
             <stringProp name="Argument.desc">Base folder ID for creating JMeter folders and uploading files</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="box.folders.endpoint" elementType="Argument">
+            <stringProp name="Argument.name">box.folders.endpoint</stringProp>
+            <stringProp name="Argument.value">${__P(box.folders.endpoint)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="box.upload.endpoint" elementType="Argument">
+            <stringProp name="Argument.name">box.upload.endpoint</stringProp>
+            <stringProp name="Argument.value">${__P(box.upload.endpoint)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="box.files.endpoint" elementType="Argument">
+            <stringProp name="Argument.name">box.files.endpoint</stringProp>
+            <stringProp name="Argument.value">${__P(box.files.endpoint)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
           <elementProp name="file.mime.type" elementType="Argument">
             <stringProp name="Argument.name">file.mime.type</stringProp>
             <stringProp name="Argument.value">${__P(file.mime.type)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="file.download.path" elementType="Argument">
-            <stringProp name="Argument.name">file.download.path</stringProp>
-            <stringProp name="Argument.value">${__P(file.download.path)}</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="user.login" elementType="Argument">
-            <stringProp name="Argument.name">user.login</stringProp>
-            <stringProp name="Argument.value">${__P(user.login)}</stringProp>
-            <stringProp name="Argument.desc">User email</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="box.config.path" elementType="Argument">
-            <stringProp name="Argument.name">box.config.path</stringProp>
-            <stringProp name="Argument.value">${__P(box.config.path)}</stringProp>
-            <stringProp name="Argument.desc">Box App Client Id</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="max.cache.entries" elementType="Argument">
-            <stringProp name="Argument.name">max.cache.entries</stringProp>
-            <stringProp name="Argument.value">${__P(max.cache.entries)}</stringProp>
-            <stringProp name="Argument.desc">Box App max cache entries</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
       </Arguments>
       <hashTree/>
       <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Thread Group" enabled="true">
-        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <stringProp name="ThreadGroup.on_sample_error">stoptestnow</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
@@ -183,7 +177,7 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </SetupThreadGroup>
       <hashTree>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="JSR223 - Load Props File" enabled="true">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="1. JSR223 - Load Props File" enabled="true">
           <stringProp name="cacheKey">true</stringProp>
           <stringProp name="filename"></stringProp>
           <stringProp name="parameters"></stringProp>
@@ -195,14 +189,14 @@ import java.util.stream.Stream;
 
 
 File propsFile = null;
-try { 
+try {
 	def path = FileServer.getFileServer().getDefaultBase();
 	def separator = File.separator;
 	def parentDir = Path.of(path).getParent();
 	def customPropsDir = Path.of(parentDir.toString() + separator + &apos;custom_properties&apos;);
 	log.info(&apos;Found props dir: &apos; + customPropsDir);
 	List&lt;String&gt; results;
-	
+
 	 try (Stream&lt;Path&gt; walk = Files.walk(customPropsDir)) {
 	 	results = walk
               .filter(p -&gt; !Files.isDirectory(p))   // not a directory
@@ -235,7 +229,7 @@ catch(Exception e)
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223Sampler>
         <hashTree/>
-        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="SDK - Get Box Connection" enabled="true">
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="2. SDK - Get Box Auth Token" enabled="true">
           <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments">
               <elementProp name="box.config.path" elementType="Argument">
@@ -258,12 +252,17 @@ catch(Exception e)
           <stringProp name="classname">com.box.platform.jmeter.sampler.GetBoxConnection</stringProp>
         </JavaSampler>
         <hashTree/>
+        <SyncTimer guiclass="TestBeanGUI" testclass="SyncTimer" testname="Synchronizing Timer" enabled="true">
+          <intProp name="groupSize">0</intProp>
+          <longProp name="timeoutInMs">0</longProp>
+        </SyncTimer>
+        <hashTree/>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Main Thread Group" enabled="true">
-        <stringProp name="ThreadGroup.on_sample_error">stoptestnow</stringProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${max.file.count}</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">${thread.count}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${rampup}</stringProp>
@@ -275,214 +274,144 @@ catch(Exception e)
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Create Folder Loop" enabled="true">
-          <boolProp name="LoopController.continue_forever">true</boolProp>
-          <stringProp name="LoopController.loops">${max.folder.count}</stringProp>
-        </LoopController>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="3. SDK - Create Folder" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="box.config.path" elementType="Argument">
+                <stringProp name="Argument.name">box.config.path</stringProp>
+                <stringProp name="Argument.value">${box.config.path}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="max.cache.entries" elementType="Argument">
+                <stringProp name="Argument.name">max.cache.entries</stringProp>
+                <stringProp name="Argument.value">${max.cache.entries}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="user.login" elementType="Argument">
+                <stringProp name="Argument.name">user.login</stringProp>
+                <stringProp name="Argument.value">${user.login}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="base.folder.id" elementType="Argument">
+                <stringProp name="Argument.name">base.folder.id</stringProp>
+                <stringProp name="Argument.value">${base.folder.id}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">com.box.platform.jmeter.sampler.CreateFolder</stringProp>
+        </JavaSampler>
+        <hashTree/>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="6. SDK - Upload + Add Metadata" enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
         <hashTree>
-          <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Folder Counter" enabled="true">
-            <stringProp name="CounterConfig.start">1</stringProp>
-            <stringProp name="CounterConfig.end">${max.folder.count}</stringProp>
-            <stringProp name="CounterConfig.incr">1</stringProp>
-            <stringProp name="CounterConfig.name">current.folder.count</stringProp>
-            <stringProp name="CounterConfig.format">#</stringProp>
-            <boolProp name="CounterConfig.per_user">true</boolProp>
-          </CounterConfig>
-          <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP - Create Folder" enabled="true">
-            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+          <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="4. SDK - Upload Files" enabled="true">
+            <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&#xd;
-	&quot;name&quot;: &quot;JMeter-HTTP1-Test-${__threadNum}-${__time(yyyyMMdd-HHmmss)}&quot;,&#xd;
-	&quot;parent&quot;: {&#xd;
-		&quot;id&quot;: &quot;${base.folder.id}&quot;&#xd;
-	}&#xd;
-}&#xd;
-</stringProp>
+                <elementProp name="box.config.path" elementType="Argument">
+                  <stringProp name="Argument.name">box.config.path</stringProp>
+                  <stringProp name="Argument.value">${box.config.path}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="max.cache.entries" elementType="Argument">
+                  <stringProp name="Argument.name">max.cache.entries</stringProp>
+                  <stringProp name="Argument.value">${max.cache.entries}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="user.login" elementType="Argument">
+                  <stringProp name="Argument.name">user.login</stringProp>
+                  <stringProp name="Argument.value">${user.login}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="sample.file.path" elementType="Argument">
+                  <stringProp name="Argument.name">sample.file.path</stringProp>
+                  <stringProp name="Argument.value">${sample.file.path}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
-            <stringProp name="HTTPSampler.domain">${box.base.domain}</stringProp>
-            <stringProp name="HTTPSampler.port">443</stringProp>
-            <stringProp name="HTTPSampler.protocol">${box.http.protocol}</stringProp>
-            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${box.folders.path}</stringProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
-            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-              <collectionProp name="HeaderManager.headers">
-                <elementProp name="" elementType="Header">
-                  <stringProp name="Header.name">Authorization</stringProp>
-                  <stringProp name="Header.value">Bearer ${__property(box.access.token)}</stringProp>
+            <stringProp name="classname">com.box.platform.jmeter.sampler.UploadFile</stringProp>
+          </JavaSampler>
+          <hashTree/>
+          <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="5. SDK - Add Metadata" enabled="true">
+            <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="box.config.path" elementType="Argument">
+                  <stringProp name="Argument.name">box.config.path</stringProp>
+                  <stringProp name="Argument.value">${box.config.path}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="max.cache.entries" elementType="Argument">
+                  <stringProp name="Argument.name">max.cache.entries</stringProp>
+                  <stringProp name="Argument.value">${max.cache.entries}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="user.login" elementType="Argument">
+                  <stringProp name="Argument.name">user.login</stringProp>
+                  <stringProp name="Argument.value">${user.login}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="current.file.id" elementType="Argument">
+                  <stringProp name="Argument.name">current.file.id</stringProp>
+                  <stringProp name="Argument.value">${current.file.id}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="metadata.template.key" elementType="Argument">
+                  <stringProp name="Argument.name">metadata.template.key</stringProp>
+                  <stringProp name="Argument.value">${metadata.template.key}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="string.metadata.keys" elementType="Argument">
+                  <stringProp name="Argument.name">string.metadata.keys</stringProp>
+                  <stringProp name="Argument.value">${string.metadata.keys}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="string.metadata.values" elementType="Argument">
+                  <stringProp name="Argument.name">string.metadata.values</stringProp>
+                  <stringProp name="Argument.value">${string.metadata.values}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="number.metadata.keys" elementType="Argument">
+                  <stringProp name="Argument.name">number.metadata.keys</stringProp>
+                  <stringProp name="Argument.value">${number.metadata.keys}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="number.metadata.values" elementType="Argument">
+                  <stringProp name="Argument.name">number.metadata.values</stringProp>
+                  <stringProp name="Argument.value">${number.metadata.values}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
-            </HeaderManager>
-            <hashTree/>
-            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor - Current Folder Id" enabled="true">
-              <stringProp name="JSONPostProcessor.referenceNames">current.folder.id</stringProp>
-              <stringProp name="JSONPostProcessor.jsonPathExprs">$.id</stringProp>
-              <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
-            </JSONPostProcessor>
-            <hashTree/>
-          </hashTree>
-          <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Upload File Loop" enabled="true">
-            <boolProp name="LoopController.continue_forever">true</boolProp>
-            <stringProp name="LoopController.loops">${max.file.count}</stringProp>
-          </LoopController>
-          <hashTree>
-            <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="File Counter" enabled="true">
-              <stringProp name="CounterConfig.start">1</stringProp>
-              <stringProp name="CounterConfig.end">${max.file.count}</stringProp>
-              <stringProp name="CounterConfig.incr">1</stringProp>
-              <stringProp name="CounterConfig.name">current.file.count</stringProp>
-              <stringProp name="CounterConfig.format">#</stringProp>
-              <boolProp name="CounterConfig.per_user">false</boolProp>
-            </CounterConfig>
-            <hashTree/>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP - Upload File" enabled="true">
-              <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
-                <collectionProp name="HTTPFileArgs.files">
-                  <elementProp name="${sample.file.path}" elementType="HTTPFileArg">
-                    <stringProp name="File.mimetype">text/plain</stringProp>
-                    <stringProp name="File.path">${sample.file.path}</stringProp>
-                    <stringProp name="File.paramname">file</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-                <collectionProp name="Arguments.arguments">
-                  <elementProp name="attributes" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&quot;name&quot;:&quot;${__threadNum}-${__time(yyyyMMdd-HHmmss)}.${current.file.count}.TestFile.txt&quot;, &quot;parent&quot;:{&quot;id&quot;:&quot;${current.folder.id}&quot;}}</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                    <stringProp name="Argument.name">attributes</stringProp>
-                    <stringProp name="HTTPArgument.content_type">multipart/form-data</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${box.upload.domain}</stringProp>
-              <stringProp name="HTTPSampler.port"></stringProp>
-              <stringProp name="HTTPSampler.protocol">${box.http.protocol}</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">${box.upload.path}</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Authorization</stringProp>
-                    <stringProp name="Header.value">Bearer ${__property(box.access.token)}</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor - Current File Id" enabled="true">
-                <stringProp name="JSONPostProcessor.referenceNames">current.file.id</stringProp>
-                <stringProp name="JSONPostProcessor.jsonPathExprs">$.entries[0].id</stringProp>
-                <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
-              </JSONPostProcessor>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP - Add Metadata" enabled="true">
-              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                <collectionProp name="Arguments.arguments">
-                  <elementProp name="" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&#xd;
-	&quot;accountName&quot;: &quot;AcmeCo&quot;,&#xd;
-	&quot;accountId&quot;: &quot;123465&quot;&#xd;
-}&#xd;
-</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${box.base.domain}</stringProp>
-              <stringProp name="HTTPSampler.port"></stringProp>
-              <stringProp name="HTTPSampler.protocol">${box.http.protocol}</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">${box.files.path}/${current.file.id}/metadata/enterprise_${box.eid}/${metadata.template.key}</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Authorization</stringProp>
-                    <stringProp name="Header.value">Bearer ${__property(box.access.token)}</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/json</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP -  Download File" enabled="true">
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-                <collectionProp name="Arguments.arguments"/>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${box.base.domain}</stringProp>
-              <stringProp name="HTTPSampler.port"></stringProp>
-              <stringProp name="HTTPSampler.protocol">${box.http.protocol}</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">${box.files.path}/${current.file.id}/content</stringProp>
-              <stringProp name="HTTPSampler.method">GET</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Authorization</stringProp>
-                    <stringProp name="Header.value">Bearer ${__property(box.access.token)}</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-            </hashTree>
-          </hashTree>
+            </elementProp>
+            <stringProp name="classname">com.box.platform.jmeter.sampler.CreateMetadataOnFile</stringProp>
+          </JavaSampler>
+          <hashTree/>
         </hashTree>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="7. SDK - Download File" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="box.config.path" elementType="Argument">
+                <stringProp name="Argument.name">box.config.path</stringProp>
+                <stringProp name="Argument.value">${box.config.path}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="max.cache.entries" elementType="Argument">
+                <stringProp name="Argument.name">max.cache.entries</stringProp>
+                <stringProp name="Argument.value">${max.cache.entries}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="user.login" elementType="Argument">
+                <stringProp name="Argument.name">user.login</stringProp>
+                <stringProp name="Argument.value">${user.login}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">com.box.platform.jmeter.sampler.DownloadFile</stringProp>
+        </JavaSampler>
+        <hashTree/>
       </hashTree>
       <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>

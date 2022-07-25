@@ -7,9 +7,6 @@ import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
 import org.apache.jmeter.samplers.SampleResult;
-import org.apache.jmeter.threads.JMeterContext;
-import org.apache.jmeter.threads.JMeterContextService;
-import org.apache.jmeter.threads.JMeterVariables;
 
 
 import java.io.PrintWriter;
@@ -28,7 +25,6 @@ public class CreateFolder implements JavaSamplerClient {
     private static final String BOX_CONFIG_PATH = "box.config.path";
     private static final String MAX_CACHE_ENTRIES = "max.cache.entries";
     private static final String USER_LOGIN = "user.login";
-    private static final String CURRENT_FOLDER_COUNT = "current.folder.count";
     private static final String CURRENT_FOLDER_ID = "current.folder.id";
     private static final String BASE_FOLDER_ID = "base.folder.id";
     private static final String BASE_FOLDER_NAME = "JMeterTest-SDK-";
@@ -46,7 +42,6 @@ public class CreateFolder implements JavaSamplerClient {
         defaultParameters.addArgument(BOX_CONFIG_PATH, "${"+ BOX_CONFIG_PATH + "}");
         defaultParameters.addArgument(MAX_CACHE_ENTRIES, "${" + MAX_CACHE_ENTRIES + "}");
         defaultParameters.addArgument(USER_LOGIN, "${" + USER_LOGIN + "}");
-        defaultParameters.addArgument(CURRENT_FOLDER_COUNT,"${" + CURRENT_FOLDER_COUNT + "}");
         defaultParameters.addArgument(BASE_FOLDER_ID,"${" + BASE_FOLDER_ID + "}");
 
         return defaultParameters;
@@ -96,8 +91,7 @@ public class CreateFolder implements JavaSamplerClient {
         try{
             BoxFolder parentFolder = new BoxFolder(api, jmeterBaseFolderId);
 
-            String currentFolderCount = runContext.getParameter(CURRENT_FOLDER_COUNT);
-            BoxFolder.Info folderInfo = parentFolder.createFolder(currentFolderCount + TEST_FOLDER_NAME);
+            BoxFolder.Info folderInfo = parentFolder.createFolder(UUID.randomUUID() + TEST_FOLDER_NAME);
             String currentFolderId = folderInfo.getID();
 
             runContext.getJMeterVariables().put(CURRENT_FOLDER_ID, currentFolderId);
