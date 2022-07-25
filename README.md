@@ -18,10 +18,14 @@ JMeter Box Java SDK Sampler Clients Currently Implemented
 
 JMeter Test Plans
 -----------------
-* [box_java_sdk.jmx](https://github.com/kylefernandadams/box-benchmark-framework/blob/master/src/test/jmeter/box_java_sdk.jmx)
-  * Leverages the Box Java SDK (HTTP/1.1)
-* [box_http1.jmx](https://github.com/kylefernandadams/box-benchmark-framework/blob/master/src/test/jmeter/box_http1.jmx)
-  * Leverages the JMeter-provided Apache HttpClient4 library
+* [box_http1_duration.jmx](https://github.com/kylefernandadams/box-benchmark-framework/blob/master/src/test/jmeter/box_http1_duration.jmx)
+  *  Leverages the JMeter-provided Apache HttpClient4 library to execute tests for a number of files
+* [box_http1_volume.jmx](https://github.com/kylefernandadams/box-benchmark-framework/blob/master/src/test/jmeter/box_http1_volume.jmx)
+  *  Leverages the JMeter-provided Apache HttpClient4 library to execute tests for a number of files within a duration
+* [box_java_sdk_duration.jmx](https://github.com/kylefernandadams/box-benchmark-framework/blob/master/src/test/jmeter/box_java_sdk_duration.jmx)
+  * Leverages the Box Java SDK (HTTP/1.1) to execute tests for a number of files within a duration
+* [box_java_sdk_volume.jmx](https://github.com/kylefernandadams/box-benchmark-framework/blob/master/src/test/jmeter/box_java_sdk_volume.jmx)
+  * Leverages the Box Java SDK (HTTP/1.1) to execute tests for a number of files
 
 Prerequisites
 -------------
@@ -60,24 +64,28 @@ Configuration - Properties Files
 -------------
 1. Edit the [box_http1.properties](https://github.com/kylefernandadams/box-benchmark-framework/blob/master/src/test/jmeter/box_http1.properties) file with your Box application and enterprise specifics.
 
-| Property              | Sample Value                                 | Description                                                                                                                                     |
-|-----------------------|----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| thread.count          | 1                                            | Number of threads or users to use. Keep this at 1 for now. <br/> ***Recommendation***: Start with a low number (thread.count=1)                 |
-| max.file.count        | 10                                           | Total number of files to include in the load test <br/> ***Recommendation***: Start with a low number (max.file.count=1) and gradually increase |
-| rampup                | 4                                            | Amount of time in seconds to ramp up before executing test threads                                                                              |
-| user.login            | me@email.com                                 | Email address for the user to run the tests as                                                                                                  |
-| box.eid               | 12345                                        | Box Enterprise Id used in Metadata POST requests                                                                                                |
-| box.config.path       | /my/path/123_config.json                     | Path to the Box application config JSON file used for instantiating JWT connections                                                             |
-| box.folders.endpoint  | https://api.box.com/2.0/folders              | Endpoint for Box folders                                                                                                                        |
-| box.upload.endpoint   | https://upload.box.com/api/2.0/files/content | Endpoint for Box file upload                                                                                                                    |
-| box.files.endpoint    | https://api.box.com/2.0/files                | Endpoint for Box files                                                                                                                          |
-| max.cache.entries     | 100                                          | Access token cache int for Box JWT client                                                                                                       |
-| max.folder.count      | 1                                            | Controls how many parent folders to create during the load test                                                                                 |
-| sample.file.path      | /path/to/my/Text.txt                         | Path to the sample file used in the load tests                                                                                                  |
-| file.mime.type        | text/plain                                   | Mime/type for the sample file                                                                                                                   |
-| metadata.template.key | account                                      | Box metadata template key                                                                                                                       |
-| metadata.keys         | accountId,accountName                        | Comma-delimited string of metadata attribute keys                                                                                               |
-| metadata.values       | 123456,AcmeCo                                | Comma-delimited string of metadata attribute values that pair up with the above keys                                                            |
+| Property               | Sample Value                                 | Description                                                                                                                                     |
+|------------------------|----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| thread.count           | 1                                            | Number of threads or users to use. Keep this at 1 for now. <br/> ***Recommendation***: Start with a low number (thread.count=1)                 |
+| duration.seconds       | 300                                          | Overall duration to attempt to run the tests in seconds                                                                                         |
+| max.file.count         | 10                                           | Total number of files to include in the load test <br/> ***Recommendation***: Start with a low number (max.file.count=1) and gradually increase |
+| rampup                 | 4                                            | Amount of time in seconds to ramp up before executing test threads                                                                              |
+| user.login             | me@email.com                                 | Email address for the user to run the tests as                                                                                                  |
+| box.eid                | 12345                                        | Box Enterprise Id used in Metadata POST requests                                                                                                |
+| box.config.path        | /my/path/123_config.json                     | Path to the Box application config JSON file used for instantiating JWT connections                                                             |
+| box.folders.endpoint   | https://api.box.com/2.0/folders              | Endpoint for Box folders                                                                                                                        |
+| box.upload.endpoint    | https://upload.box.com/api/2.0/files/content | Endpoint for Box file upload                                                                                                                    |
+| box.files.endpoint     | https://api.box.com/2.0/files                | Endpoint for Box files                                                                                                                          |
+| max.cache.entries      | 100                                          | Access token cache int for Box JWT client                                                                                                       |
+| max.folder.count       | 1                                            | Controls how many parent folders to create during the load test                                                                                 |
+| sample.file.path       | /path/to/my/Text.txt                         | Path to the sample file used in the load tests                                                                                                  |
+| file.mime.type         | text/plain                                   | Mime/type for the sample file                                                                                                                   |
+| metadata.template.key  | account                                      | Box metadata template key                                                                                                                       |
+| string.metadata.keys   | accountType,accountName                      | Comma-delimited string of metadata attribute keys                                                                                               |
+| string.metadata.values | Customer,AcmeCo                              | Comma-delimited string of metadata attribute values that pair up with the above keys                                                            |
+| number.metadata.keys   | accountId,accountZip                         | Comma-delimited string of metadata attribute keys                                                                                               |
+| number.metadata.values | 123456,12345                                 | Comma-delimited string of metadata attribute values that pair up with the above keys                                                            |
+
 | base.folder.id        | 0                                            | The base folder to create folders and upload files for the performance test                                                                     |
 2. Enable or disable test plans to run by commenting/uncomment out each test plan in the [pom.xml](/pom.xml#L114) file. 
 
@@ -85,11 +93,11 @@ Run Options - JMeter GUI
 -------------
 * This is useful for making changes to the Test Plans or running smoke tests
 ```bash
-mvn jmeter:configure jmeter:gui -DguiTestFile="src/test/jmeter/box_java_sdk.jmx"
+mvn jmeter:configure jmeter:gui -DguiTestFile="src/test/jmeter/box_java_sdk_volume.jmx"
 ```
 OR
 ```bash
-mvn jmeter:configure jmeter:gui -DguiTestFile="src/test/jmeter/box_http1.jmx"
+mvn jmeter:configure jmeter:gui -DguiTestFile="src/test/jmeter/box_http1_volume.jmx"
 ```
 
 Run Options - Command Line
