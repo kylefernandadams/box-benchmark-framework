@@ -10,6 +10,8 @@ import org.apache.jmeter.util.JMeterUtils;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 
 /**
  * JMeter sampler client which creates a Box connection.
@@ -66,7 +68,9 @@ public class GetBoxConnection implements JavaSamplerClient{
 
             BoxDeveloperEditionAPIConnection api = BoxDeveloperEditionAPIConnection.getUserConnection(this.userLogin, boxConfig, accessTokenCache);
 //            api.setCustomHeader("Accept-Encoding", "gzip, deflate");
-
+//            Proxy proxy=new Proxy(Proxy.Type.HTTP,new InetSocketAddress("localhost.charlesproxy.com",8888));
+            // You can use any subclass of BoxAPIConnection
+//            api.setProxy(proxy);
             String accessToken = api.getAccessToken();
 
             JMeterUtils.getJMeterProperties().setProperty(BOX_ACCESS_TOKEN, accessToken);
