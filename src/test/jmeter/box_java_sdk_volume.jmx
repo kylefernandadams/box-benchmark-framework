@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.5">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Box Java SDK Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Parameters" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="thread.count" elementType="Argument">
+            <stringProp name="Argument.name">thread.count</stringProp>
+            <stringProp name="Argument.value">${__P(thread.count)}</stringProp>
+            <stringProp name="Argument.desc">Number of simultaneous users</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="rampup" elementType="Argument">
+            <stringProp name="Argument.name">rampup</stringProp>
+            <stringProp name="Argument.value">${__P(rampup)}</stringProp>
+            <stringProp name="Argument.desc">Ramp-up time for test</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="user.login" elementType="Argument">
+            <stringProp name="Argument.name">user.login</stringProp>
+            <stringProp name="Argument.value">${__P(user.login)}</stringProp>
+            <stringProp name="Argument.desc">User email</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="box.config.path" elementType="Argument">
+            <stringProp name="Argument.name">box.config.path</stringProp>
+            <stringProp name="Argument.value">${__P(box.config.path)}</stringProp>
+            <stringProp name="Argument.desc">Box App Client Id</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="max.cache.entries" elementType="Argument">
+            <stringProp name="Argument.name">max.cache.entries</stringProp>
+            <stringProp name="Argument.value">${__P(max.cache.entries)}</stringProp>
+            <stringProp name="Argument.desc">Box App max cache entries</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="max.folder.count" elementType="Argument">
+            <stringProp name="Argument.name">max.folder.count</stringProp>
+            <stringProp name="Argument.value">${__P(max.folder.count)}</stringProp>
+            <stringProp name="Argument.desc">Maximum amount of folders to create</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="max.file.count" elementType="Argument">
+            <stringProp name="Argument.name">max.file.count</stringProp>
+            <stringProp name="Argument.value">${__P(max.file.count)}</stringProp>
+            <stringProp name="Argument.desc">Maximum amount of files to create in each folder</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="sample.file.path" elementType="Argument">
+            <stringProp name="Argument.name">sample.file.path</stringProp>
+            <stringProp name="Argument.value">${__P(sample.file.path)}</stringProp>
+            <stringProp name="Argument.desc">Path to the sample file</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="metadata.template.key" elementType="Argument">
+            <stringProp name="Argument.name">metadata.template.key</stringProp>
+            <stringProp name="Argument.value">${__P(metadata.template.key)}</stringProp>
+            <stringProp name="Argument.desc">Key of the Metadata Template. Note that this is not the Display Name.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="string.metadata.keys" elementType="Argument">
+            <stringProp name="Argument.name">string.metadata.keys</stringProp>
+            <stringProp name="Argument.value">${__P(string.metadata.keys)}</stringProp>
+            <stringProp name="Argument.desc">Only Use Text or Dropdown MD Properties. Key of the Metadata properties. Note that this is not the Display Name.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="string.metadata.values" elementType="Argument">
+            <stringProp name="Argument.name">string.metadata.values</stringProp>
+            <stringProp name="Argument.value">${__P(string.metadata.values)}</stringProp>
+            <stringProp name="Argument.desc">Only Use Text or Dropdown MD Properties. Value of the Metadata properties. Note that this is not the Display Name.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="number.metadata.keys" elementType="Argument">
+            <stringProp name="Argument.name">number.metadata.keys</stringProp>
+            <stringProp name="Argument.value">${__P(number.metadata.keys)}</stringProp>
+            <stringProp name="Argument.desc">Only Use Text or Dropdown MD Properties. Key of the Metadata properties. Note that this is not the Display Name.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="number.metadata.values" elementType="Argument">
+            <stringProp name="Argument.name">number.metadata.values</stringProp>
+            <stringProp name="Argument.value">${__P(number.metadata.values)}</stringProp>
+            <stringProp name="Argument.desc">Only Use Text or Dropdown MD Properties. Value of the Metadata properties. Note that this is not the Display Name.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="use.current.datetime" elementType="Argument">
+            <stringProp name="Argument.name">use.current.datetime</stringProp>
+            <stringProp name="Argument.value">${__P(use.current.datetime)}</stringProp>
+            <stringProp name="Argument.desc">Set to true to automatically populate with current date.</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="base.folder.id" elementType="Argument">
+            <stringProp name="Argument.name">base.folder.id</stringProp>
+            <stringProp name="Argument.value">${__P(base.folder.id)}</stringProp>
+            <stringProp name="Argument.desc">Base folder ID for creating JMeter folders and uploading files</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="box.folders.endpoint" elementType="Argument">
+            <stringProp name="Argument.name">box.folders.endpoint</stringProp>
+            <stringProp name="Argument.value">${__P(box.folders.endpoint)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="box.upload.endpoint" elementType="Argument">
+            <stringProp name="Argument.name">box.upload.endpoint</stringProp>
+            <stringProp name="Argument.value">${__P(box.upload.endpoint)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="box.files.endpoint" elementType="Argument">
+            <stringProp name="Argument.name">box.files.endpoint</stringProp>
+            <stringProp name="Argument.value">${__P(box.files.endpoint)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="file.mime.type" elementType="Argument">
+            <stringProp name="Argument.name">file.mime.type</stringProp>
+            <stringProp name="Argument.value">${__P(file.mime.type)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">stoptestnow</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="1. JSR223 - Load Props File" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import org.apache.jmeter.services.FileServer;
+import java.nio.file.*;
+import java.nio.file.Paths;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+
+File propsFile = null;
+try {
+	def path = FileServer.getFileServer().getDefaultBase();
+	def separator = File.separator;
+	def parentDir = Path.of(path).getParent();
+	def customPropsDir = Path.of(parentDir.toString() + separator + &apos;custom_properties&apos;);
+	log.info(&apos;Found props dir: &apos; + customPropsDir);
+	List&lt;String&gt; results;
+
+	 try (Stream&lt;Path&gt; walk = Files.walk(customPropsDir)) {
+	 	results = walk
+              .filter(p -&gt; !Files.isDirectory(p))   // not a directory
+              .map(p -&gt; p.toString().toLowerCase()) // convert path to string
+              .filter(f -&gt; f.contains(&apos;box_http1&apos;))
+              .collect(Collectors.toList());        // collect all matched to a List
+	}
+  	log.info(&apos;Found result count &apos; + results.get(0))
+   	propsFile = new File(results.get(0))
+  	if(!propsFile.exists()) {
+	   	throw FileNotFoundException(&apos;Box properties file NOT found!&apos;)
+   	}
+   	else {
+   		log.info(&apos;Found props file: &apos; + propsFile.getAbsolutePath())
+   		def box_properties = new Properties()
+		box_properties.load(new FileInputStream(propsFile))
+		box_properties.each { prop -&gt;
+			String propKey = prop.getKey()
+			String propValue = prop.getValue()
+		    log.info(&apos;Found prop key:value &apos; + propKey + &apos;:&apos; + propValue)
+		    vars.put(propKey, propValue)
+		}
+   	}
+}
+catch(Exception e)
+{
+	e.printStackTrace()
+}
+</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="2. SDK - Get Box Auth Token" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="box.config.path" elementType="Argument">
+                <stringProp name="Argument.name">box.config.path</stringProp>
+                <stringProp name="Argument.value">${box.config.path}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="max.cache.entries" elementType="Argument">
+                <stringProp name="Argument.name">max.cache.entries</stringProp>
+                <stringProp name="Argument.value">${max.cache.entries}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="user.login" elementType="Argument">
+                <stringProp name="Argument.name">user.login</stringProp>
+                <stringProp name="Argument.value">${user.login}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">com.box.platform.jmeter.sampler.GetBoxConnection</stringProp>
+        </JavaSampler>
+        <hashTree/>
+        <SyncTimer guiclass="TestBeanGUI" testclass="SyncTimer" testname="Synchronizing Timer" enabled="true">
+          <intProp name="groupSize">0</intProp>
+          <longProp name="timeoutInMs">0</longProp>
+        </SyncTimer>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Main Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">${max.file.count}</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${thread.count}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${rampup}</stringProp>
+        <longProp name="ThreadGroup.start_time">1293887799000</longProp>
+        <longProp name="ThreadGroup.end_time">1293887799000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">${DURATION}</stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="3. SDK - Create Folder" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="box.config.path" elementType="Argument">
+                <stringProp name="Argument.name">box.config.path</stringProp>
+                <stringProp name="Argument.value">${box.config.path}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="max.cache.entries" elementType="Argument">
+                <stringProp name="Argument.name">max.cache.entries</stringProp>
+                <stringProp name="Argument.value">${max.cache.entries}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="user.login" elementType="Argument">
+                <stringProp name="Argument.name">user.login</stringProp>
+                <stringProp name="Argument.value">${user.login}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="base.folder.id" elementType="Argument">
+                <stringProp name="Argument.name">base.folder.id</stringProp>
+                <stringProp name="Argument.value">${base.folder.id}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">com.box.platform.jmeter.sampler.CreateFolder</stringProp>
+        </JavaSampler>
+        <hashTree/>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="6. SDK - Upload + Add Metadata" enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="4. SDK - Upload Files" enabled="true">
+            <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="box.config.path" elementType="Argument">
+                  <stringProp name="Argument.name">box.config.path</stringProp>
+                  <stringProp name="Argument.value">${box.config.path}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="max.cache.entries" elementType="Argument">
+                  <stringProp name="Argument.name">max.cache.entries</stringProp>
+                  <stringProp name="Argument.value">${max.cache.entries}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="user.login" elementType="Argument">
+                  <stringProp name="Argument.name">user.login</stringProp>
+                  <stringProp name="Argument.value">${user.login}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="sample.file.path" elementType="Argument">
+                  <stringProp name="Argument.name">sample.file.path</stringProp>
+                  <stringProp name="Argument.value">${sample.file.path}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="classname">com.box.platform.jmeter.sampler.UploadFile</stringProp>
+          </JavaSampler>
+          <hashTree/>
+          <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="5. SDK - Add Metadata" enabled="true">
+            <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="box.config.path" elementType="Argument">
+                  <stringProp name="Argument.name">box.config.path</stringProp>
+                  <stringProp name="Argument.value">${box.config.path}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="max.cache.entries" elementType="Argument">
+                  <stringProp name="Argument.name">max.cache.entries</stringProp>
+                  <stringProp name="Argument.value">${max.cache.entries}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="user.login" elementType="Argument">
+                  <stringProp name="Argument.name">user.login</stringProp>
+                  <stringProp name="Argument.value">${user.login}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="current.file.id" elementType="Argument">
+                  <stringProp name="Argument.name">current.file.id</stringProp>
+                  <stringProp name="Argument.value">${current.file.id}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="metadata.template.key" elementType="Argument">
+                  <stringProp name="Argument.name">metadata.template.key</stringProp>
+                  <stringProp name="Argument.value">${metadata.template.key}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="string.metadata.keys" elementType="Argument">
+                  <stringProp name="Argument.name">string.metadata.keys</stringProp>
+                  <stringProp name="Argument.value">${string.metadata.keys}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="string.metadata.values" elementType="Argument">
+                  <stringProp name="Argument.name">string.metadata.values</stringProp>
+                  <stringProp name="Argument.value">${string.metadata.values}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="number.metadata.keys" elementType="Argument">
+                  <stringProp name="Argument.name">number.metadata.keys</stringProp>
+                  <stringProp name="Argument.value">${number.metadata.keys}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="number.metadata.values" elementType="Argument">
+                  <stringProp name="Argument.name">number.metadata.values</stringProp>
+                  <stringProp name="Argument.value">${number.metadata.values}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="classname">com.box.platform.jmeter.sampler.CreateMetadataOnFile</stringProp>
+          </JavaSampler>
+          <hashTree/>
+        </hashTree>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="7. SDK - Download File" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="box.config.path" elementType="Argument">
+                <stringProp name="Argument.name">box.config.path</stringProp>
+                <stringProp name="Argument.value">${box.config.path}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="max.cache.entries" elementType="Argument">
+                <stringProp name="Argument.name">max.cache.entries</stringProp>
+                <stringProp name="Argument.value">${max.cache.entries}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="user.login" elementType="Argument">
+                <stringProp name="Argument.name">user.login</stringProp>
+                <stringProp name="Argument.value">${user.login}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">com.box.platform.jmeter.sampler.DownloadFile</stringProp>
+        </JavaSampler>
+        <hashTree/>
+      </hashTree>
+      <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
