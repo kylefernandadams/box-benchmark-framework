@@ -62,7 +62,7 @@ mvn clean package
 
 Configuration - Properties Files
 -------------
-1. Edit the [box_http1.properties](https://github.com/kylefernandadams/box-benchmark-framework/blob/master/src/test/jmeter/box_http1.properties) file with your Box application and enterprise specifics.
+1. Edit the [box.properties](https://github.com/kylefernandadams/box-benchmark-framework/blob/master/src/test/jmeter/box.properties) file with your Box application and enterprise specifics.
 
 | Property               | Sample Value                                 | Description                                                                                                                                     |
 |------------------------|----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
