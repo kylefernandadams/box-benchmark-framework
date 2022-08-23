@@ -1,6 +1,6 @@
 Box Benchmark Framework
 ==================
-The Box Benchmark Framework project's allows you to create load tests with the [Box Java SDK](https://github.com/box/box-java-sdk), REST Endpoints, and more leveraging Apache JMeter. 
+The Box Benchmark Framework project allows you to create load tests with the [Box Java SDK](https://github.com/box/box-java-sdk), REST Endpoints, and more leveraging Apache JMeter. 
 
 Apache JMeter
 -------------
